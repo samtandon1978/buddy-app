@@ -22,7 +22,7 @@ const MODE_BUTTONS = [
 
 
 function ChatBubble({ message }: { message: ChatMessage }) {
-  const isTeddy = message.sender === "buddy";
+  const isTeddy = message.sender === "teddy";
   
   return (
     <div className={`flex ${isTeddy ? "justify-start" : "justify-end"}`}>
@@ -60,7 +60,7 @@ const [stars, setStars] = useState(0)
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "1",
-      sender: "buddy",
+      sender: "teddy",
       text: "Hello Sahana! Let's talk?",
     },
   ]);
@@ -341,7 +341,7 @@ return [
     id: messageId,
     sender:
       message.role === "assistant"
-        ? "buddy"
+        ? "teddy"
         : "child",
     text,
   },
