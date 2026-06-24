@@ -5,10 +5,7 @@ export async function GET() {
     const apiKey = process.env.GROK_API_KEY;
 
     if (!apiKey) {console.log("GROK_API_KEY NOT FOUND");
-      return NextResponse.json(
-        { error: "Missing GROK_API_KEY" },
-        { status: 500 }
-      );
+      
     }
 
     const response = await fetch(
