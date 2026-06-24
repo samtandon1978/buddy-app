@@ -1,0 +1,62 @@
+[
+{
+"id": 31,
+"category": "what-happens-next",
+"question": "You are at the airport. Your flight is delayed. What will you do next?",
+"choices": [
+"Wait and find something to do",
+"Run to the airplane",
+"Leave the airport"
+],
+"correctChoice": 0,
+"keywords": ["wait", "something to do", "find something"]
+},
+{
+"id": 32,
+"category": "what-happens-next",
+"question": "You are in a restaurant. Your food is very hot. What should you do?",
+"choices": [
+"Wait for it to cool down",
+"Eat it quickly",
+"Throw it away"
+],
+"correctChoice": 0,
+"keywords": ["wait", "cool", "cool down"]
+},
+{
+"id": 33,
+"category": "what-happens-next",
+"question": "You are walking outside and it starts raining. What can you do?",
+"choices": [
+"Go inside a shop",
+"Sit on the road",
+"Keep standing still"
+],
+"correctChoice": 0,
+"keywords": ["shop", "inside", "go inside"]
+},
+{
+"id": 34,
+"category": "what-happens-next",
+"question": "Teacher gives you a difficult worksheet. What should you do?",
+"choices": [
+"Try first and ask for help",
+"Tear the paper",
+"Leave the class"
+],
+"correctChoice": 0,
+"keywords": ["try", "help", "ask help"]
+},
+{
+"id": 35,
+"category": "what-happens-next",
+"question": "You are playing a game and the rules change. What should you do?",
+"choices": [
+"Try to understand the new rules",
+"Stop playing and shout",
+"Walk away"
+],
+"correctChoice": 0,
+"keywords": ["understand", "new rules", "try"]
+}
+]
