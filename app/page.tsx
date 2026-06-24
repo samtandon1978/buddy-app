@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { createGrokService } from "../lib/grok";
-import Teddy, { type TeddyState } from "../components/Teddy";
+import Teddy from "../components/Teddy";
 import curriculum from "../data/curriculum.json";
 
 type ChatMessage = {
@@ -44,7 +44,7 @@ function ChatBubble({ message }: { message: ChatMessage }) {
 
 export default function Home() {
   const [teddyState, setTeddyState] =
-  useState<TeddyState>("idle");
+  useState<"idle" | "listening" | "thinking" | "speaking">("idle");
   const [isConnected, setIsConnected] = useState(false);
   const [showStars, setShowStars] = useState(false);
   const [gameMode, setGameMode] = useState(false);
@@ -125,7 +125,7 @@ gameModeRef.current = true;
       <section className="flex w-[40%] flex-col border-r border-white/70 bg-white/50 backdrop-blur-sm">
       <Teddy
   state={teddyState}
-  showStars={showStars}
+  
 />
       </section>
 
