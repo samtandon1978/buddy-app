@@ -122,14 +122,14 @@ gameModeRef.current = true;
   }
   return (
     <main className="flex flex-col md:flex-row h-screen w-screen overflow-hidden bg-gradient-to-br from-rose-50 via-sky-50 to-amber-50">
-      <section className="flex w-full md:w-[40%] flex-col border-r border-white/70 bg-white/50 backdrop-blur-sm">
+      <section className="flex w-[40%] flex-col border-r border-white/70 bg-white/50 backdrop-blur-sm">
       <Teddy
   state={teddyState}
   
 />
       </section>
 
-      <section className="flex w-full md:w-[60%] flex-col">
+      <section className="flex w-[60%] flex-col">
         <div className="border-b border-white/70 bg-white/70 px-5 py-4 backdrop-blur-sm">
           <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
             Choose a way to talk
