@@ -12,10 +12,10 @@ type ChatMessage = {
 };
 
 const MODE_BUTTONS = [
-  { label: "Talk", emoji: "💬", color: "bg-sky-100 text-sky-800 hover:bg-sky-200" },
-  { label: "Story", emoji: "📖", color: "bg-rose-100 text-rose-800 hover:bg-rose-200" },
-  { label: "Feelings", emoji: "😊", color: "bg-amber-100 text-amber-800 hover:bg-amber-200" },
-  { label: "Why?", emoji: "🤔", color: "bg-violet-100 text-violet-800 hover:bg-violet-200" },
+  //{ label: "Talk", emoji: "💬", color: "bg-sky-100 text-sky-800 hover:bg-sky-200" },
+  //{ label: "Story", emoji: "📖", color: "bg-rose-100 text-rose-800 hover:bg-rose-200" },
+ // { label: "Feelings", emoji: "😊", color: "bg-amber-100 text-amber-800 hover:bg-amber-200" },
+  //{ label: "Why?", emoji: "🤔", color: "bg-violet-100 text-violet-800 hover:bg-violet-200" },
   { label: "What Next?", emoji: "🔮", color: "bg-emerald-100 text-emerald-800 hover:bg-emerald-200" },
 ];
 
@@ -277,11 +277,28 @@ if (
   message.role === "user" &&
   currentQuestionRef.current
 ) {
+  setGameMode(false);
+  gameModeRef.current = false;
+if (
+  gameModeRef.current &&
+  message.role === "user" &&
+  currentQuestionRef.current
+) {
+  setGameMode(false);
+  gameModeRef.current = false;
+  currentQuestionRef.current = null;
   grokRef.current.sendText(
-    "Great job Sahana! You got it right."
+    "Great job Sahana!"
   );
+
   return;
-} 
+}
+  grokRef.current.sendText(
+    "Great job Sahana!"
+  );
+
+  return;
+}
 if (message.role === "assistant") {
   setShowStars(true);
 
