@@ -121,8 +121,8 @@ gameModeRef.current = true;
       `);
   }
   return (
-    <main className="flex flex-col md:flex-row h-screen w-screen overflow-hidden bg-gradient-to-br from-rose-50 via-sky-50 to-amber-50">
-      <section className="flex w-full md:w-[40%] flex-col border-r border-white/70 bg-white/50 backdrop-blur-sm">
+    <main className="flex h-screen w-screen overflow-hidden bg-gradient-to-br from-rose-50 via-sky-50 to-amber-50">
+      <section className="flex w-[40%] flex-col border-r border-white/70 bg-white/50 backdrop-blur-sm">
       <Teddy
   state={teddyState}
   
@@ -134,7 +134,7 @@ gameModeRef.current = true;
           <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
             Choose a way to talk
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-3 justify-center">
             {MODE_BUTTONS.map((button) => (
               <button
               key={button.label}
