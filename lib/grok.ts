@@ -16,7 +16,7 @@ export type GrokTranscriptRole = "user" | "assistant";
 
 export type GrokSessionConfig = {
   instructions?: string;
-  voice?: GrokVoice;
+  voice?: GrokVoice;	
   turnDetection?: { type: "server_vad" } | { type: null };
   sampleRate?: number;
   transcriptionModel?: "grok-transcribe";
@@ -280,31 +280,16 @@ export class GrokRealtimeService {
         autoGainControl: true,
       },
     })
-console.log(
-  "MIC TRACKS:",
-  this.mediaStream.getAudioTracks().length
-);
 
-console.log(
-  "MIC LABEL:",
-  this.mediaStream.getAudioTracks()[0]?.label
-);
 ;
 
     this.audioContext = new AudioContext({ sampleRate });
-
-console.log(
-  "Actual sample rate:",
-  this.audioContext.sampleRate
-);
     this.mediaSource = this.audioContext.createMediaStreamSource(this.mediaStream);
     this.processorNode = this.audioContext.createScriptProcessor(4096, 1, 1);
 
  this.processorNode.onaudioprocess = (event) => {
 
-//  if (Math.random() < 0.01) {
-  //console.log("🎤 audio chunk");
-//}
+
 
   if (!this.isMicrophoneActive || this.connectionState !== "connected") {
     return;
@@ -358,10 +343,7 @@ this.processorNode.connect(this.audioContext.destination);
 
 appendInputAudio(audio: ArrayBuffer): void {
 
-  //if (Math.random() < 0.01) {
-  //console.log(    "Sending audio bytes:",    audio.byteLength
-  //);
-//}
+
 
   this.sendEvent({
     type: "input_audio_buffer.append",
@@ -446,11 +428,6 @@ catch {
         break;
 
       case "conversation.item.input_audio_transcription.completed":
-  console.log(
-    "USER TRANSCRIPT:",
-    event.transcript
-  );
-
   this.callbacks.onTranscript?.({
     role: "user",
     text: String(event.transcript ?? ""),

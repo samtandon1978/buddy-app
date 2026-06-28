@@ -120,6 +120,41 @@ gameModeRef.current = true;
       - Do not continue the game.
       `);
   }
+  async function endSession() {
+    try {
+      await grokRef.current?.disconnect();
+  
+      grokRef.current = null;
+  
+      setIsConnected(false);
+      setGameMode(false);
+      gameModeRef.current = false;
+      currentQuestionRef.current = null;
+  
+      setTeddyState("idle");
+  
+      console.log("Session ended");
+      const transcript = messages
+      .map(
+        (m) =>
+          `${m.sender === "teddy" ? "Buddy" : "Sahana"}: ${m.text}`
+      )
+      .join("\n");
+      await fetch("/api/sendTranscript", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          transcript,
+        }),
+      });
+      
+    
+    } catch (err) {
+      console.error(err);
+    }
+  }
   return (
     <main className="flex h-screen w-screen overflow-hidden bg-gradient-to-br from-rose-50 via-sky-50 to-amber-50">
       <section className="flex w-[40%] flex-col border-r border-white/70 bg-white/50 backdrop-blur-sm">
@@ -139,6 +174,7 @@ gameModeRef.current = true;
               <button
               key={button.label}
               type="button"
+              
               onClick={() => {
                 setSelectedMode(button.label);
             
@@ -167,6 +203,7 @@ gameModeRef.current = true;
         <div className="border-t border-white/70 bg-white/80 p-3 md:p-5 backdrop-blur-sm">
         <button
   type="button"
+  disabled={isConnected}
   onClick={async () => {
     try {
       const response = await fetch("/api/token");
@@ -256,7 +293,7 @@ Buddy: "Wow! The cat ran fast and jumped over a puddle."
           },
       
           onTranscript: (message) => {
-console.log("Transcript:", message);
+
 
 if (message.role === "user") {
 setTeddyState("thinking");
@@ -267,23 +304,22 @@ setTeddyState("speaking");
 }
 
 if (!message.isFinal) return;
-console.log(
-  "FINAL MESSAGE:",
-  message.role,
-  message.text
-);
+
+
+
 if (
   gameModeRef.current &&
   message.role === "user" &&
   currentQuestionRef.current
-) {
-  setGameMode(false);
-  gameModeRef.current = false;
-if (
-  gameModeRef.current &&
-  message.role === "user" &&
-  currentQuestionRef.current
-) {
+) //{
+  //setGameMode(false);
+  //gameModeRef.current = false;
+//if (
+  //gameModeRef.current &&
+  //message.role === "user" &&
+  //currentQuestionRef.current
+//) 
+{
   setGameMode(false);
   gameModeRef.current = false;
   currentQuestionRef.current = null;
@@ -292,12 +328,12 @@ if (
   );
 
   return;
-}
-  grokRef.current.sendText(
-    "Great job Sahana!"
-  );
+//}
+  //grokRef.current.sendText(
+    //"Great job Sahana!"
+  //);
 
-  return;
+  //return;
 }
 if (message.role === "assistant") {
   setShowStars(true);
@@ -443,12 +479,26 @@ onAudio: (message) => {
       alert("Connection failed. Check console.");
     }
   }}
-  className="flex w-full items-center justify-center gap-4 rounded-3xl bg-pink-500 px-8 py-5 text-2xl font-bold text-white shadow-lg transition hover:bg-pink-600"
+  className={`flex w-full items-center justify-center gap-4 rounded-3xl px-8 py-5 text-2xl font-bold text-white shadow-lg transition
+    ${
+      isConnected
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-pink-500 hover:bg-pink-600"
+    }`}
+
 >
   <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/25 text-3xl">
     🎤
   </span>
   Start Talking
+</button>
+<button
+  type="button"
+  onClick={endSession}
+  disabled={!isConnected}
+  className="mt-3 flex w-full items-center justify-center rounded-3xl bg-red-500 px-8 py-4 text-xl font-bold text-white shadow-lg transition hover:bg-red-600 disabled:bg-gray-300"
+>
+  🛑 End Session
 </button>
         </div>
       </section>
