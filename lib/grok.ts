@@ -17,7 +17,13 @@ export type GrokTranscriptRole = "user" | "assistant";
 export type GrokSessionConfig = {
   instructions?: string;
   voice?: GrokVoice;	
-  turnDetection?: { type: "server_vad" } | { type: null };
+  turnDetection?: {
+    type: "server_vad";
+    silence_duration_ms?: number;
+    prefix_padding_ms?: number;
+  } | {
+    type: null;
+  };
   sampleRate?: number;
   transcriptionModel?: "grok-transcribe";
   languageHint?: string;
@@ -146,7 +152,12 @@ function buildSessionUpdateEvent(session: GrokSessionConfig): RealtimeEvent {
     session: {
       instructions: session.instructions,
       voice: session.voice ?? "leo",
-      turn_detection: session.turnDetection ?? { type: "server_vad" },
+      turn_detection:
+  session.turnDetection ?? {
+    type: "server_vad",
+    silence_duration_ms: 1500,
+    prefix_padding_ms: 500,
+  },
       reasoning: session.reasoningEffort
         ? { effort: session.reasoningEffort }
         : undefined,
