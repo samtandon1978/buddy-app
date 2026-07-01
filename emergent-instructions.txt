@@ -1,0 +1,26 @@
+his is a production project. Do not refactor, rename, reorganize, or modify existing files unless absolutely necessary for the requested feature.
+
+Please follow these rules:
+
+Modify the minimum number of files required.
+Preserve all existing functionality, including Grok voice, transcript emailing, game mode, Teddy animations, and Vercel deployment.
+Do not change prompts, conversation logic, API routes, or file structure unless explicitly requested.
+Create new files instead of rewriting existing ones whenever possible.
+Before making changes, tell me which files you plan to modify.
+After making changes, provide a summary of every file changed and why.
+If a change requires modifying more than 5 existing files, stop and ask for confirmation first.
+Do not refactor working code.
+Do not rename files.
+Do not move files.
+Do not change prompts.
+Do not change Grok integration.
+Do not modify conversation logic.
+Do not change API routes.
+
+Only implement the requested feature.
+At the end, provide:
+
+Files modified
+Files created
+Why each file changed
+Any risks introduced
